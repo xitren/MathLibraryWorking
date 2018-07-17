@@ -53,6 +53,9 @@ extern "C" {
 #define assert_param_morethatzero(X) \
     assert( (X) > 0 ); \
     
+#define assert_param_range(BORDER_LOWEST, X, BORDER_HIGHEST) \
+    assert( ( BORDER_LOWEST <= (X) ) & ( (X) <= BORDER_HIGHEST ) ); \
+    
 typedef int32_t sample_t;
 
 /**

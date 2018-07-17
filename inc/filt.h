@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#define ML_FILT_SETS(POINTER, \
+#define ML_FILT_SETS(PNTR, \
                     NAME, \
                     USE, \
                     TYPE_FILTER, \
@@ -23,27 +23,32 @@ extern "C" {
                     SAMPLING_FREQUENCY, \
                     CUTOFF_FREQUENCY, \
                     LENGTH_BUFFER, \
-                    TEMP_BUFFER, \
-                    IBUFFER, \
-                    OBEFFER, \
-                    COEFFICIENTS) { \
+                    PNTR_TEMP_BUFFER, \
+                    PNTR_IBUFFER, \
+                    PNTR_OBEFFER, \
+                    PNTR_COEFFICIENTS) { \
     assert_param_existpointer(NAME); \
-    (POINTER).name              = (NAME); \
+    (PNTR).name              = (NAME); \
     assert_param_trueorfalse(USE); \
-    (POINTER).status            = (USE) ? MATHLIB_YES : MATHLIB_NO; \
-    (POINTER).filter_type       = (TYPE_FILTER); \
+    (PNTR).status            = (USE) ? MATHLIB_YES : MATHLIB_NO; \
+    assert_param_range(MATHLIB_FILT_LOWPASS, (TYPE_FILTER), MATHLIB_FILT_USERS); \
+    (PNTR).filter_type       = (TYPE_FILTER); \
     assert_param_morethatzero(ORDER_FILTER); \
-    (POINTER).order             = (ORDER_FILTER); \
+    (PNTR).order             = (ORDER_FILTER); \
     assert_param_morethatzero(SAMPLING_FREQUENCY); \
-    (POINTER).sampl_freq_hz     = (SAMPLING_FREQUENCY); \
+    (PNTR).sampl_freq_hz     = (SAMPLING_FREQUENCY); \
     assert_param_morethatzero(CUTOFF_FREQUENCY); \
-    (POINTER).cutoff_freq_hz    = (CUTOFF_FREQUENCY); \
+    (PNTR).cutoff_freq_hz    = (CUTOFF_FREQUENCY); \
     assert_param_morethatzero(LENGTH_BUFFER); \
-    (POINTER).length_buffer     = (LENGTH_BUFFER); \
-    (POINTER).m_buffer          = (TEMP_BUFFER); \
-    (POINTER).inp_buffer        = (IBUFFER); \
-    (POINTER).out_buffer        = (OBEFFER); \
-    (POINTER).coeff             = (COEFFICIENTS); }\
+    (PNTR).length_buffer     = (LENGTH_BUFFER); \
+    assert_param_existpointer(PNTR_TEMP_BUFFER); \
+    assert_param_existpointer(PNTR_IBUFFER); \
+    assert_param_existpointer(PNTR_OBEFFER); \
+    assert_param_existpointer(PNTR_COEFFICIENTS); \
+    (PNTR).m_buffer          = (PNTR_TEMP_BUFFER); \
+    (PNTR).inp_buffer        = (PNTR_IBUFFER); \
+    (PNTR).out_buffer        = (PNTR_OBEFFER); \
+    (PNTR).coeff             = (PNTR_COEFFICIENTS); } \
     
 typedef enum
 {
@@ -53,17 +58,17 @@ typedef enum
 } filter_t;
     
 typedef struct {
-    status_using_t  status;
-    unsigned char   *name;
-    filter_t        filter_type;
-    uint32_t        order;
-    double          sampl_freq_hz;
-    double          cutoff_freq_hz;
-    size_t          length_buffer;
-    sample_t        *m_buffer;
-    sample_t        *inp_buffer;
+    status_using_t  status;             /* Use filter? (MATHLIB_NO or MATHLIB_YES) */
+    unsigned char   *name;              /* Name filter */
+    filter_t        filter_type;        /* Filter type (MATHLIB_FILT_LOWPASS, MATHLIB_FILT_HIGHPASS, MATHLIB_FILT_USERS) */
+    uint32_t        order;              /* Order filter. Must be more than zero */
+    double          sampl_freq_hz;      /* Sampling frequency of signals, Hz. Must be more than zero */
+    double          cutoff_freq_hz;     /* Cutoff frequency for filter, Hz. Must be more than zero */
+    size_t          length_buffer;      /* Buffer size. Must be more than zero */
+    sample_t        *m_buffer;          /* Pointer for temp buffer. Minimal buffer size must be is @order */
+    sample_t        *inp_buffer;        /*  */
     sample_t        *out_buffer;
-    double          *coeff;
+    double          *coeff;             /* Pointer for coefficients array. Array size must be is @order */
     uint32_t        m_n_buffer_index;   /* Not used for init */
     uint32_t        buffer_it;          /* Not used for init */
 } transition_filt_t;
