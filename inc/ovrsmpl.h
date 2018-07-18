@@ -55,14 +55,14 @@ extern "C" {
     (PNTR).filt.coeff         = (PNTR_FILTER_COEFFICIENTS); }           \
     
 typedef struct {
-    unsigned char       *name;
-    status_using_t      status;
-    double              source_freq_hz;
-    double              target_freq_hz;
+    unsigned char       *name;          /* Name of structure */
+    status_using_t      status;         /* Use oversampler? (MATHLIB_YES or MATHLIB_NO) */
+    double              source_freq_hz; /* Target frequency, Hz */
+    double              target_freq_hz; /* Target frequency, Hz */
     
-    transition_filt_t   filt;          /*  */
-    sample_t            *buffer;        /*  */
-    size_t              length_buffer;  /*  */
+    transition_filt_t   filt;           /* Low-Pass filter for cutoff noise */
+    sample_t            *buffer;        /* Buffer for saving result of oversampling */
+    size_t              length_buffer;  /* Buffer length */
     uint32_t            buffer_mask;    /* Not used for init */
     uint32_t            step;           /* Not used for init */
     uint32_t            read_pos;       /* Not used for init */
