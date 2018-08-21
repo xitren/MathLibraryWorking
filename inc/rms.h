@@ -22,10 +22,10 @@ typedef struct {
 } transition_rms_t;
     
 
-sample_t ml_rms_get(transition_rms_t *rms, sample_t input);
-
-
-sample_t ml_rms_init(sample_t input);
+//sample_t ml_rms_get(transition_rms_t *rms, sample_t input);
+//
+//
+//sample_t ml_rms_init(sample_t input);
 
 #ifdef __cplusplus
 }

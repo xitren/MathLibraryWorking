@@ -59,7 +59,7 @@ typedef enum
     
 typedef struct {
     status_using_t  status;             /* Use filter? (MATHLIB_NO or MATHLIB_YES) */
-    unsigned char   *name;              /* Name filter */
+    char            *name;              /* Name filter */
     filter_t        filter_type;        /* Filter type (MATHLIB_FILT_LOWPASS, MATHLIB_FILT_HIGHPASS, MATHLIB_FILT_USERS) */
     uint32_t        order;              /* Order filter. Must be more than zero */
     double          sampl_freq_hz;      /* Sampling frequency of signals, Hz. Must be more than zero */

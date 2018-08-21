@@ -13,7 +13,19 @@
 extern "C" {
 #endif
 
-void init_stimulus(
+typedef struct {
+    unsigned char *name; /* Name of structure */
+    status_using_t status; /* (MATHLIB_YES or MATHLIB_NO) */
+    uint32_t freq_hz; /* Frequency sampling */
+
+    uint32_t freq_stimulus_hz; /* Frequency stimulus */
+    uint32_t num_stimulus; /* Number stimulus in process */
+    uint32_t durat_stimulus_ms; /* Duration of presentation */
+
+    uint32_t timeout_ms; /* Timeout beetween stimulus */
+} stimulus_freq_t;
+
+void stimulus_init(
     int _number_of_targ,
     int _number_of_targ_rep,
     int _number_of_stimulus,
@@ -22,8 +34,10 @@ void init_stimulus(
     int _wait_between_stim,
     int _wait_before_targ );
 
-void get_stimulus(int *targ, int *stim);
+void stimulus_get(int *targ, int *stim);
 
+void stimulus_init_freq(stimulus_freq_t str_stim);
+void stimulus_get_freq(stimulus_freq_t *str_stim, int *targ, int *stim);
 
 #ifdef __cplusplus
 }
