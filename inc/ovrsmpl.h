@@ -27,7 +27,7 @@ extern "C" {
                     PNTR_FILTER_TEMP_BUFFER, \
                     PNTR_FILTER_IBUFFER, \
                     PNTR_FILTER_OBEFFER, \
-                    PNTR_FILTER_COEFFICIENTS ) {                                \
+                    PNTR_FILTER_COEFFICIENTS )                                  \
     assert_param_existpointer(NAME);                                            \
     assert_param_trueorfalse(USE);                                              \
     assert_param_morethatzero(SOURCE_FREQUENCY);                                \
@@ -35,11 +35,11 @@ extern "C" {
     assert_param_range( 0, (TARGET_FREQUENCY), (SOURCE_FREQUENCY) );            \
     assert_param_existpointer(PNTR_BUFFER);                                     \
     assert_param_morethatzero(LENGTH_BUFFER);                                   \
-    (PNTR).name             = (NAME);                                           \
+    (PNTR).name             = (unsigned char *)(NAME);                          \
     (PNTR).status           = (USE) ? MATHLIB_YES : MATHLIB_NO;                 \
-    (PNTR).source_freq_hz   = (SOURCE_FREQUENCY);                               \
-    (PNTR).target_freq_hz   = (TARGET_FREQUENCY);                               \
-    (PNTR).buffer           = (PNTR_BUFFER);                                    \
+    (PNTR).source_freq_hz   = (double)(SOURCE_FREQUENCY);                       \
+    (PNTR).target_freq_hz   = (double)(TARGET_FREQUENCY);                       \
+    (PNTR).buffer           = (sample_t *)(PNTR_BUFFER);                        \
     (PNTR).length_buffer    = (LENGTH_BUFFER);                                  \
     assert_param_morethatzero(FILTER_LENGTH_BUFFER);                            \
     assert_param_morethatzero(FILTER_ORDER);                                    \
@@ -47,12 +47,12 @@ extern "C" {
     assert_param_existpointer(PNTR_FILTER_IBUFFER);                             \
     assert_param_existpointer(PNTR_FILTER_OBEFFER);                             \
     assert_param_existpointer(PNTR_FILTER_COEFFICIENTS);                        \
-    (PNTR).filt.length_buffer = (FILTER_LENGTH_BUFFER);                 \
-    (PNTR).filt.order         = (FILTER_ORDER);                         \
-    (PNTR).filt.m_buffer      = (PNTR_FILTER_TEMP_BUFFER);              \
-    (PNTR).filt.inp_buffer    = (PNTR_FILTER_IBUFFER);                  \
-    (PNTR).filt.out_buffer    = (PNTR_FILTER_OBEFFER);                  \
-    (PNTR).filt.coeff         = (PNTR_FILTER_COEFFICIENTS); }           \
+    (PNTR).filt.length_buffer = (uint32_t)(FILTER_LENGTH_BUFFER);               \
+    (PNTR).filt.order         = (uint32_t)(FILTER_ORDER);                       \
+    (PNTR).filt.m_buffer      = (sample_t *)(PNTR_FILTER_TEMP_BUFFER);          \
+    (PNTR).filt.inp_buffer    = (sample_t *)(PNTR_FILTER_IBUFFER);              \
+    (PNTR).filt.out_buffer    = (sample_t *)(PNTR_FILTER_OBEFFER);              \
+    (PNTR).filt.coeff         = (double *)(PNTR_FILTER_COEFFICIENTS);           \
     
 typedef struct {
     unsigned char       *name;          /* Name of structure */
@@ -81,4 +81,3 @@ sample_t ml_ovrsmpl_pull(transition_ovrsmpl_t *ovrsmpl);
 #endif
 
 #endif /* OVRSMPL_H */
-
