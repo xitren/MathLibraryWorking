@@ -35,7 +35,7 @@ extern "C" {
     assert_param_range( 0, (TARGET_FREQUENCY), (SOURCE_FREQUENCY) );            \
     assert_param_existpointer(PNTR_BUFFER);                                     \
     assert_param_morethatzero(LENGTH_BUFFER);                                   \
-    (PNTR).name             = (unsigned char *)(NAME);                          \
+    (PNTR).name             = (unsigned char *)(NAME);                            \
     (PNTR).status           = (USE) ? MATHLIB_YES : MATHLIB_NO;                 \
     (PNTR).source_freq_hz   = (double)(SOURCE_FREQUENCY);                       \
     (PNTR).target_freq_hz   = (double)(TARGET_FREQUENCY);                       \
@@ -81,3 +81,4 @@ sample_t ml_ovrsmpl_pull(transition_ovrsmpl_t *ovrsmpl);
 #endif
 
 #endif /* OVRSMPL_H */
+
