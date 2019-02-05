@@ -4,27 +4,23 @@
  * and open the template in the editor.
  */
 
-/* 
- * File:   polynom.h
- * Author: prilutsky_d
- *
- * Created on 4 июня 2018 г., 15:35
- */
-
-#ifndef POLYNOM_H
-#define POLYNOM_H
-
-#include "math_library_types.h"
+#ifndef FILT_EX_H
+#define FILT_EX_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-extern dynamic_table_t polycoeff;
+#include <stdint.h>
+#include <stddef.h>
+#include "math_lib_types.h"
 
+
+typedef int32_t element_t;
+    
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* POLYNOM_H */
+#endif /* FILT_EX_H */
 
