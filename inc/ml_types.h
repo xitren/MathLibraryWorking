@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-#ifndef TYPES_H
-#define TYPES_H
+#ifndef ML_TYPES_H
+#define ML_TYPES_H
 
 #include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <assert.h>
+#include "arm_math.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,11 +45,6 @@ extern "C" {
         return MATHLIB_ERROR; \
     } \
     */
-
-#define assert_param_using(X) \
-    if ( (X)->status == MATHLIB_NO ) { \
-        return input; \
-    } \
     
 #define assert_param_morethatzero(X) \
     assert((X) > 0); \
@@ -56,27 +52,17 @@ extern "C" {
 #define assert_param_range(BORDER_LOWEST, X, BORDER_HIGHEST) \
     assert(((uint32_t)BORDER_LOWEST >= (X)) && ((X) <= (uint32_t)BORDER_HIGHEST)); \
     
-    typedef int32_t sample_t;
-
-    /**
-     * @param input Input sample for conversation
-     * @return Sample before conversation
-     */
-    typedef sample_t(*fconv)(sample_t const input);
+    typedef int32_t sample_si32_t;
+    typedef float32_t sample_f32_t;
 
     typedef enum {
         MATHLIB_OK = 0,
         MATHLIB_ERROR = -1
-    } status_t;
-
-    typedef enum {
-        MATHLIB_NO = 0,
-        MATHLIB_YES
-    } status_using_t;
+    } ml_status_t;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* TYPES_H */
+#endif /* ML_TYPES_H */
 

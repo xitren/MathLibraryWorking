@@ -4,17 +4,10 @@
  * and open the template in the editor.
  */
 
-/* 
- * File:   polynom.h
- * Author: prilutsky_d
- *
- * Created on 4 июня 2018 г., 15:35
- */
-
 #ifndef POLYNOM_H
 #define POLYNOM_H
 
-#include "math_lib_types.h"
+#include "ml_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,8 +20,6 @@ extern "C" {
                     ELEMENTS_POINTER) \
     assert_param_existpointer(NAME); \
     (POINTER).name      = (NAME); \
-    assert_param_trueorfalse(USE); \
-    (POINTER).status    = (USE) ? (MATHLIB_YES) : (MATHLIB_NO); \
     assert_param_morethatzero(SIZE); \
     (POINTER).size      = (SIZE); \
     assert_param_existpointer(ELEMENTS_POINTER); \
@@ -41,16 +32,15 @@ typedef struct {
 
 typedef struct {
     unsigned char   *name;
-    status_using_t  status;
     size_t          size;
     element_t       *elements;
-} transition_poly_t;
+} poly_opt_t;
 
 
-status_t ml_poly_init(transition_poly_t *poly);
+ml_status_t ml_poly_init(poly_opt_t *poly);
 
 
-sample_t ml_poly_get(transition_poly_t *poly, const sample_t input);
+sample_si32_t ml_poly_get(poly_opt_t *poly, const sample_si32_t input);
 
 #ifdef __cplusplus
 }

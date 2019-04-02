@@ -7,14 +7,13 @@
 #ifndef FFT_H
 #define FFT_H
 
-#include "math_lib_types.h"
+#include "ml_types.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef struct {
-    status_using_t  status_fft;
     int32_t         min_frequency;
     int32_t         max_frequency;
 } transition_fft_t;

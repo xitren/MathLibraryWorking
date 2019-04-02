@@ -7,8 +7,7 @@
 #ifndef RMS_H
 #define RMS_H
 
-#include <stddef.h>
-#include "math_lib_types.h"
+#include "ml_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,10 +15,9 @@ extern "C" {
 
 typedef struct {
     unsigned char   *name;
-    status_using_t  status;
-    sample_t        *buffer;
+    sample_si32_t   *buffer;
     size_t          size;
-} transition_rms_t;
+} rms_opt_t;
     
 
 //sample_t ml_rms_get(transition_rms_t *rms, sample_t input);

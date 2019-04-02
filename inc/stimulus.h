@@ -7,7 +7,7 @@
 #ifndef STIMULUS_H
 #define STIMULUS_H
 
-#include "math_lib_types.h"
+#include "ml_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,7 +15,6 @@ extern "C" {
 
 typedef struct {
     unsigned char *name; /* Name of structure */
-    status_using_t status; /* (MATHLIB_YES or MATHLIB_NO) */
     uint32_t freq_hz; /* Frequency sampling */
 
     uint32_t freq_stimulus_hz; /* Frequency stimulus */
