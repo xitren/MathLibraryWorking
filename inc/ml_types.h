@@ -17,6 +17,8 @@
 extern "C" {
 #endif
 
+#define ABS(X)  (X > 0) ? (X) : (-1 * X)
+
 #define NAME_OF(var)  #var
 
 #define assert_param_trueorfalse(X) \

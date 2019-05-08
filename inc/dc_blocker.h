@@ -19,10 +19,7 @@ typedef struct {
     char        *name;
     float32_t   cutoff_freq_hz;      /* Sampling frequency of signals, Hz. Must be more than zero */
     float32_t   sampling_freq_hz;      /* Sampling frequency of signals, Hz. Must be more than zero */
-    uint32_t   length;
     float32_t   alpha; /* Not used for init */
-    uint32_t   inc; /* Not used for init */
-    float32_t   dc; /* Not used for init */
     float32_t   temp; /* Not used for init */
     float32_t   xn_1; /* Not used for init */
     float32_t   yn_1; /* Not used for init */
