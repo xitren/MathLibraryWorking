@@ -47,42 +47,42 @@ extern "C" {
     (PNTR).out_buffer        = (PNTR_OBEFFER); \
     (PNTR).coeff             = (PNTR_COEFFICIENTS); } \
     
-typedef enum
-{
-    MATHLIB_FILT_LOWPASS = 0,
-    MATHLIB_FILT_HIGHPASS,
-    MATHLIB_FILT_USERS
-} filter_t;
-    
-typedef struct {
-    char            *name;              /* Name filter */
-    filter_t        filter_type;        /* Filter type (MATHLIB_FILT_LOWPASS, MATHLIB_FILT_HIGHPASS, MATHLIB_FILT_USERS) */
-    uint32_t        order;              /* Order filter. Must be more than zero */
-    float32_t          sampl_freq_hz;      /* Sampling frequency of signals, Hz. Must be more than zero */
-    float32_t          cutoff_freq_hz;     /* Cutoff frequency for filter, Hz. Must be more than zero */
-    size_t          length_buffer;      /* Buffer size. Must be more than zero */
-    sample_si32_t   *m_buffer;          /* Pointer for temp buffer. Minimal buffer size must be is @order */
-    sample_si32_t   *inp_buffer;        /*  */
-    sample_si32_t   *out_buffer;
-    float32_t       *coeff;             /* Pointer for coefficients array. Array size must be is @order */
-    uint32_t        m_n_buffer_index;   /* Not used for init */
-    uint32_t        buffer_it;          /* Not used for init */
-} filt_opt_t;
 
-/**
- * Initialization and validation filter structure
- * @param filt Structure pointer for filter
- * @return Status about validation
- */
-ml_status_t ml_filt_init(filt_opt_t *filt);
+	typedef enum {
+		MATHLIB_FILT_LOWPASS = 0,
+		MATHLIB_FILT_HIGHPASS,
+		MATHLIB_FILT_USERS
+	} filter_t;
 
-/**
- * Getting sample after filtration
- * @param filt Structure pointer of filter
- * @param input Sample for filtration
- * @return Status about coefficient created
- */
-sample_si32_t ml_filt_get(filt_opt_t *filt, sample_si32_t input);
+	typedef struct {
+		char *name; /* Name filter */
+		filter_t filter_type; /* Filter type (MATHLIB_FILT_LOWPASS, MATHLIB_FILT_HIGHPASS, MATHLIB_FILT_USERS) */
+		uint32_t order; /* Order filter. Must be more than zero */
+		float32_t sampl_freq_hz; /* Sampling frequency of signals, Hz. Must be more than zero */
+		float32_t cutoff_freq_hz; /* Cutoff frequency for filter, Hz. Must be more than zero */
+		size_t length_buffer; /* Buffer size. Must be more than zero */
+		sample_si32_t *m_buffer; /* Pointer for temp buffer. Minimal buffer size must be is @order */
+		sample_si32_t *inp_buffer; /*  */
+		sample_si32_t *out_buffer;
+		float32_t *coeff; /* Pointer for coefficients array. Array size must be is @order */
+		uint32_t m_n_buffer_index; /* Not used for init */
+		uint32_t buffer_it; /* Not used for init */
+	} filt_opt_t;
+
+	/**
+	 * Initialization and validation filter structure
+	 * @param filt Structure pointer for filter
+	 * @return Status about validation
+	 */
+	ml_status_t ml_filt_init(filt_opt_t *filt);
+
+	/**
+	 * Getting sample after filtration
+	 * @param filt Structure pointer of filter
+	 * @param input Sample for filtration
+	 * @return Status about coefficient created
+	 */
+	sample_si32_t ml_filt_get(filt_opt_t *filt, sample_si32_t input);
 
 #ifdef __cplusplus
 }

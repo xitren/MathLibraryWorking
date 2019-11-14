@@ -13,10 +13,10 @@
 extern "C" {
 #endif
 
-typedef struct {
-    int32_t         min_frequency;
-    int32_t         max_frequency;
-} transition_fft_t;
+	typedef struct {
+		int32_t min_frequency;
+		int32_t max_frequency;
+	} transition_fft_t;
 
 #ifdef __cplusplus
 }

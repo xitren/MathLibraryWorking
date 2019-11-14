@@ -25,22 +25,23 @@ extern "C" {
     assert_param_existpointer(ELEMENTS_POINTER); \
     (POINTER).elements  = (ELEMENTS_POINTER); \
     
-typedef struct {
-    double coeff;
-    double power;
-} element_t;
 
-typedef struct {
-    unsigned char   *name;
-    size_t          size;
-    element_t       *elements;
-} poly_opt_t;
+	typedef struct {
+		double coeff;
+		double power;
+	} element_t;
 
-
-ml_status_t ml_poly_init(poly_opt_t *poly);
+	typedef struct {
+		unsigned char *name;
+		size_t size;
+		element_t *elements;
+	} poly_opt_t;
 
 
-sample_si32_t ml_poly_get(poly_opt_t *poly, const sample_si32_t input);
+	ml_status_t ml_poly_init(poly_opt_t *poly);
+
+
+	sample_si32_t ml_poly_get(poly_opt_t *poly, const sample_si32_t input);
 
 #ifdef __cplusplus
 }

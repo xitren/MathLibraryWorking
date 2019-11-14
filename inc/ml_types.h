@@ -47,20 +47,20 @@ extern "C" {
         return MATHLIB_ERROR; \
     } \
     */
-    
+
 #define assert_param_morethatzero(X) \
     assert((X) > 0); \
     
 #define assert_param_range(BORDER_LOWEST, X, BORDER_HIGHEST) \
     assert(((uint32_t)BORDER_LOWEST >= (X)) && ((X) <= (uint32_t)BORDER_HIGHEST)); \
     
-    typedef int32_t sample_si32_t;
-    typedef float32_t sample_f32_t;
+	typedef int32_t sample_si32_t;
+	typedef float32_t sample_f32_t;
 
-    typedef enum {
-        MATHLIB_OK = 0,
-        MATHLIB_ERROR = -1
-    } ml_status_t;
+	typedef enum {
+		MATHLIB_OK = 0,
+		MATHLIB_ERROR = -1
+	} ml_status_t;
 
 #ifdef __cplusplus
 }

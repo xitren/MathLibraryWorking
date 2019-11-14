@@ -53,26 +53,27 @@ extern "C" {
     (PNTR).filt.out_buffer    = (sample_si32_t *)(PNTR_FILTER_OBEFFER);         \
     (PNTR).filt.coeff         = (double *)(PNTR_FILTER_COEFFICIENTS);           \
     
-typedef struct {
-    char            *name;          /* Name of structure */
-    float32_t       source_freq_hz; /* Target frequency, Hz */
-    float32_t       target_freq_hz; /* Target frequency, Hz */
-    
-    filt_opt_t      filt;           /* Low-Pass filter for cutoff noise */
-    sample_si32_t   *buffer;        /* Buffer for saving result of oversampling */
-    size_t          length_buffer;  /* Buffer length */
-    uint32_t        buffer_mask;    /* Not used for init */
-    uint32_t        step;           /* Not used for init */
-    uint32_t        read_pos;       /* Not used for init */
-    uint32_t        write_pos;      /* Not used for init */
-    uint32_t        sub_pos;        /* Not used for init */
-} ovrsmpl_opt_t;
 
-int8_t ml_ovrsmpl_init_down(ovrsmpl_opt_t *ovrsmpl);
+	typedef struct {
+		char *name; /* Name of structure */
+		float32_t source_freq_hz; /* Target frequency, Hz */
+		float32_t target_freq_hz; /* Target frequency, Hz */
 
-void ml_ovrsmpl_push(ovrsmpl_opt_t *ovrsmpl, sample_si32_t input);
+		filt_opt_t filt; /* Low-Pass filter for cutoff noise */
+		sample_si32_t *buffer; /* Buffer for saving result of oversampling */
+		size_t length_buffer; /* Buffer length */
+		uint32_t buffer_mask; /* Not used for init */
+		uint32_t step; /* Not used for init */
+		uint32_t read_pos; /* Not used for init */
+		uint32_t write_pos; /* Not used for init */
+		uint32_t sub_pos; /* Not used for init */
+	} ovrsmpl_opt_t;
 
-sample_si32_t ml_ovrsmpl_pull(ovrsmpl_opt_t *ovrsmpl);
+	int8_t ml_ovrsmpl_init_down(ovrsmpl_opt_t *ovrsmpl);
+
+	void ml_ovrsmpl_push(ovrsmpl_opt_t *ovrsmpl, sample_si32_t input);
+
+	sample_si32_t ml_ovrsmpl_pull(ovrsmpl_opt_t *ovrsmpl);
 
 #ifdef __cplusplus
 }
